@@ -17,6 +17,7 @@ public class DetailActivity extends AppCompatActivity {
     private static final int DEFAULT_POSITION = -1;
 
     private TextView mDescriptionTextView;
+    private TextView mPlaceOfOriginTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +25,10 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.constraint_detail);
 
         mDescriptionTextView = (TextView) findViewById(R.id.description_tv);
+        mPlaceOfOriginTextView = (TextView) findViewById(R.id.origin_tv);
 
         ImageView ingredientsIv = findViewById(R.id.image_iv);
+
 
         Intent intent = getIntent();
         if (intent == null) {
@@ -65,6 +68,10 @@ public class DetailActivity extends AppCompatActivity {
 
         // Add the description
         mDescriptionTextView.setText(sandwich.getDescription());
+
+        mPlaceOfOriginTextView.setText(sandwich.getPlaceOfOrigin());
+
+
 
     }
 }
