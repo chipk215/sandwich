@@ -30,7 +30,7 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="@string/detail_description_label"
             app:layout_constraintStart_toStartOf="@+id/description_tv"
             app:layout_constraintTop_toTopOf="parent" />
@@ -75,11 +75,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            tools:text="Place of origin text"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+            app:layout_constraintTop_toBottomOf="@+id/textView5"
+            tools:text="Place of origin text" />
+
+        <TextView
+            android:id="@+id/also_known_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/image_iv"
+            app:layout_constraintTop_toBottomOf="@+id/textView4"
+            tools:text="AKA Text" />
 
     </android.support.constraint.ConstraintLayout>
 
