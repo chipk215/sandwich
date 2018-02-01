@@ -21,15 +21,17 @@ public class DetailActivity extends AppCompatActivity {
     private TextView mDescriptionTextView;
     private TextView mPlaceOfOriginTextView;
     private TextView mAlsoKnownAsTextView;
+    private TextView mIngredientsTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.constraint_detail);
 
-        mDescriptionTextView = (TextView) findViewById(R.id.description_tv);
-        mPlaceOfOriginTextView = (TextView) findViewById(R.id.origin_tv);
-        mAlsoKnownAsTextView = (TextView) findViewById(R.id.also_known_tv);
+        mDescriptionTextView =   findViewById(R.id.description_tv);
+        mPlaceOfOriginTextView = findViewById(R.id.origin_tv);
+        mAlsoKnownAsTextView =  findViewById(R.id.also_known_tv);
+        mIngredientsTextView =  findViewById(R.id.ingredients_tv);
 
         ImageView ingredientsIv = findViewById(R.id.image_iv);
 
@@ -56,6 +58,8 @@ public class DetailActivity extends AppCompatActivity {
         }
 
         populateUI(sandwich);
+
+        // Retrieve the sandwich image
         Picasso.with(this)
                 .load(sandwich.getImage())
                 .into(ingredientsIv);
@@ -68,7 +72,15 @@ public class DetailActivity extends AppCompatActivity {
         Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
     }
 
+
+    /**
+     * Hydrate the UI with model data
+     * @param sandwich
+     */
     private void populateUI(Sandwich sandwich) {
+
+        final String andString = " and ";
+        final String orString = " or ";
 
         // Add the description
         mDescriptionTextView.setText(sandwich.getDescription());
@@ -77,31 +89,36 @@ public class DetailActivity extends AppCompatActivity {
         mPlaceOfOriginTextView.setText(sandwich.getPlaceOfOrigin());
 
         // Add aliases
-        String formattedAliases = formatAliases(sandwich.getAlsoKnownAs());
+        String formattedAliases = listToString(sandwich.getAlsoKnownAs(), orString);
         mAlsoKnownAsTextView.setText(formattedAliases);
 
+        //Add ingredients -- Note: Using text view rather than a list since the starter code
+        // defined a text view for ingredients
+        String formattedIngredients = listToString(sandwich.getIngredients(), andString);
+        mIngredientsTextView.setText(formattedIngredients);
 
     }
 
 
     /**
      * Format the output string for improved readability of short lists and longer lists
-     * @param names
-     * @return
+     * @param items the list
+     * @param compoundConjunction conjunction used when only two items are in the list
+     * @return formatted text string containing items
      */
-    private String formatAliases(List<String> names){
+    private String listToString(List<String> items, String compoundConjunction){
         String result;
-        switch (names.size()){
+        switch (items.size()){
             case 0: result= "";
                     break;
-            case 1: result = names.get(0);
+            case 1: result = items.get(0);
                     break;
-            case 2: result = names.get(0) + "or " + names.get(1);
+            case 2: result = items.get(0) + compoundConjunction + items.get(1);
                     break;
-            default: // Insert commas between names
+            default: // Insert commas between items
                      String separator = ", ";
                      StringBuilder builder = new StringBuilder();
-                     for (String name : names){
+                     for (String name : items){
                          builder.append(name);
                          builder.append(separator);
                      }
