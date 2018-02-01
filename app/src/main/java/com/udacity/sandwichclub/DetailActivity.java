@@ -3,6 +3,7 @@ package com.udacity.sandwichclub;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,7 +21,9 @@ public class DetailActivity extends AppCompatActivity {
 
     private TextView mDescriptionTextView;
     private TextView mPlaceOfOriginTextView;
+    private TextView mPlaceOfOriginLabelTextView;
     private TextView mAlsoKnownAsTextView;
+    private TextView mAlsoKnownLabelTextView;
     private TextView mIngredientsTextView;
 
     @Override
@@ -30,7 +33,9 @@ public class DetailActivity extends AppCompatActivity {
 
         mDescriptionTextView =   findViewById(R.id.description_tv);
         mPlaceOfOriginTextView = findViewById(R.id.origin_tv);
+        mPlaceOfOriginLabelTextView = findViewById(R.id.origin_label);
         mAlsoKnownAsTextView =  findViewById(R.id.also_known_tv);
+        mAlsoKnownLabelTextView = findViewById(R.id.known_label);
         mIngredientsTextView =  findViewById(R.id.ingredients_tv);
 
         ImageView ingredientsIv = findViewById(R.id.image_iv);
@@ -86,11 +91,29 @@ public class DetailActivity extends AppCompatActivity {
         mDescriptionTextView.setText(sandwich.getDescription());
 
         // Add place of origin
-        mPlaceOfOriginTextView.setText(sandwich.getPlaceOfOrigin());
+        if (sandwich.getPlaceOfOrigin().isEmpty()){
+            //Hide views with no data
+            mPlaceOfOriginLabelTextView.setVisibility(View.GONE);
+            mPlaceOfOriginTextView.setVisibility(View.GONE);
+        }else {
+            mPlaceOfOriginLabelTextView.setVisibility(View.VISIBLE);
+            mPlaceOfOriginTextView.setVisibility(View.VISIBLE);
+            mPlaceOfOriginTextView.setText(sandwich.getPlaceOfOrigin());
+        }
+
 
         // Add aliases
-        String formattedAliases = listToString(sandwich.getAlsoKnownAs(), orString);
-        mAlsoKnownAsTextView.setText(formattedAliases);
+        if (sandwich.getAlsoKnownAs().size() == 0){
+            //Hide views with no data
+            mAlsoKnownAsTextView.setVisibility(View.GONE);
+            mAlsoKnownLabelTextView.setVisibility(View.GONE);
+
+        }else {
+            mAlsoKnownAsTextView.setVisibility(View.VISIBLE);
+            mAlsoKnownLabelTextView.setVisibility(View.VISIBLE);
+            String formattedAliases = listToString(sandwich.getAlsoKnownAs(), orString);
+            mAlsoKnownAsTextView.setText(formattedAliases);
+        }
 
         //Add ingredients -- Note: Using text view rather than a list since the starter code
         // defined a text view for ingredients
