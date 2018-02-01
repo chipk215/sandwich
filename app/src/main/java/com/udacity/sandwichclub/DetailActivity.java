@@ -91,6 +91,14 @@ public class DetailActivity extends AppCompatActivity {
         mDescriptionTextView.setText(sandwich.getDescription());
 
         // Add place of origin
+        // Note: Considered three options for handling sandwich data with no specified place of
+        // origin or also known as data.
+        // 1) Display the label but no data
+        // 2) Display label with text indicating that there is no corresponding data
+        // 3) Hide the label and display nothing.
+        //
+        // I chose option 3 since the 1st top options provide no additional information and take
+        // up screen space.
         if (sandwich.getPlaceOfOrigin().isEmpty()){
             //Hide views with no data
             mPlaceOfOriginLabelTextView.setVisibility(View.GONE);
