@@ -66,7 +66,7 @@ public class JsonUtils {
 
 
     /**
-     * Help method to convert json array of strings to java list
+     * Helper method to convert json array of strings to java list
      * @param jsonArray of strings
      * @return jave list of strings
      * @throws JSONException - if strings cannot be parsed from json array
