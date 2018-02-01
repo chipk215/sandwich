@@ -29,7 +29,7 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.constraint_detail);
+        setContentView(R.layout.activity_detail);
 
         mDescriptionTextView =   findViewById(R.id.description_tv);
         mPlaceOfOriginTextView = findViewById(R.id.origin_tv);
